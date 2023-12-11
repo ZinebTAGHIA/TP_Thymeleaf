@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Thymeleaf</title>
+    <link th:href="@{/css/style.css}" rel="stylesheet"/>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
+    <!-- jQuery library -->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.4/jquery.min.js"></script>
+    <!-- Latest compiled JavaScript -->
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
+</head>
+<body>
+<div th:switch="${users}">
+    <h2 th:case="null">No users yet!</h2>
+    <div th:case="*">
+        <div class="container">
+            <div class="col-md-6 col-xm-12 col-sm-6 col-md-offset-3">
+                <div class="panel panel-primary">
+                    <div class="panel-heading">Users list</div>
+                    <div class="panel-body">
+                        <table class="table table-striped">
+                            <thead>
+                            <tr>
+                                <th>Name</th>
+                                <th>Email</th>
+                                <th>Edit</th>
+                                <th>Delete</th>
+                            </tr>
+                            </thead>
+                            <tbody>
+                            <tr th:each="user : ${users}">
+                                <td th:text="${user.name}"></td>
+                                <td th:text="${user.email}"></td>
+                                <td><a th:href="@{/edit/{id}(id=${user.id})}" class="btn btn-primary">Edit</a></td>
+                                <td><a th:href="@{/delete/{id}(id=${user.id})}" class="btn btn-danger">Delete</a></td>
+                            </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+                <p>
+                    <a href="/signup">Add a new user</a>
+                </p>
+            </div>
+        </div>
+    </div>
+</div>
+</div>
+</body>
+</html>
